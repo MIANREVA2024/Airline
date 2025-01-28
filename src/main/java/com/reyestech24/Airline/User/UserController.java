@@ -1,5 +1,6 @@
 package com.reyestech24.Airline.User;
 
+import com.reyestech24.Airline.Flight.Flight;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,4 +39,5 @@ public class UserController {
       userService.deleteUser(id);
       return ResponseEntity.noContent().build();
     }
+
 }

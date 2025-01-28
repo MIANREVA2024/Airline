@@ -3,10 +3,7 @@ package com.reyestech24.Airline.Reservation;
 import com.reyestech24.Airline.User.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,10 +12,38 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReservationController {
 
-    private ReservationService reservationService;
+    private final ReservationService reservationService;
 
-    @GetMapping("/user")
-    public ResponseEntity<List<Reservation>> getUserReservations(@RequestParam User user){
-        return ResponseEntity.ok(reservationService.getReservationByUser(user));
+    @GetMapping
+    public ResponseEntity<List<Reservation>> getAllReservations() {
+        return ResponseEntity.ok(reservationService.getAllReservation());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+        return reservationService.getReservationtById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+        return ResponseEntity.ok(reservationService.createReservation(reservation));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservationDetails) {
+        try {
+            return ResponseEntity.ok(reservationService.updateReservation(id, reservationDetails));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
+        return ResponseEntity.noContent().build();
     }
 }
+

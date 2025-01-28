@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
-@Setter
 public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

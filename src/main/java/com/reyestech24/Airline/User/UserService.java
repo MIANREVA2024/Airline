@@ -22,7 +22,7 @@ public class UserService {
 
     public User updateUser (Long id, User userDetails){
         return userRepository.findById(id).map(user -> {
-            user.setUserName(userDetails.getUserName());
+            user.setUsername(userDetails.getUsername());
             user.setEmail(userDetails.getEmail());
             user.setProfileImage(userDetails.getProfileImage());
             user.setRole(userDetails.getRole());

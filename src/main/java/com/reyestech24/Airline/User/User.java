@@ -1,13 +1,11 @@
 package com.reyestech24.Airline.User;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,7 +15,9 @@ public class User {
     @Column(nullable = false)
     private Long id;
 
-    private String userName;
+    @Column(unique = true, nullable = false)
+    private String username;
+
     private  String password;
     private String role;
     private String profileImage;

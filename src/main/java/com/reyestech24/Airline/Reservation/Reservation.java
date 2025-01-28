@@ -3,15 +3,13 @@ package com.reyestech24.Airline.Reservation;
 import com.reyestech24.Airline.Flight.Flight;
 import com.reyestech24.Airline.User.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -20,13 +18,14 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private Flight flight;
     private LocalDateTime reservationDate;
     private int seatsReserved;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "flight_id", nullable = false)
+    private Flight flight;
 }
