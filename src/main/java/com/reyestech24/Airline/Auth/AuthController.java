@@ -1,22 +1,22 @@
 package com.reyestech24.Airline.Auth;
-
-import com.reyestech24.Airline.User.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
-@RequestMapping("/auth")
-@RequiredArgsConstructor
+@RequestMapping(path = "${api-endpoint}/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    private final TokenService tokenService;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user){
-        return ResponseEntity.ok(authService.register(user));
+    public AuthController(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
+
+    @PostMapping("/token")
+    public String token(Authentication authentication) {
+        return tokenService.generateToken(authentication);
+    }
+
 }
