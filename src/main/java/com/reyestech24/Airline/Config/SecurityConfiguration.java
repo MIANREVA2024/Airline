@@ -1,102 +1,89 @@
 package com.reyestech24.Airline.Config;
+import static org.springframework.security.config.Customizer.withDefaults;
 
-import static org.springframework.security.oauth2.core.authorization.OAuth2AuthorizationManagers.hasScope;
-
-import java.util.Arrays;
-
-import javax.crypto.spec.SecretKeySpec;
-
+import com.reyestech24.Airline.security.JpaUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Value("${jwt.key}")
-    private String key;
-
     @Value("${api-endpoint}")
-    private String endpoint;
+    String endpoint;
 
+    private JpaUserDetailsService jpaUserDetailsService;
+    public SecurityConfiguration(JpaUserDetailsService userDetailsService) {
+        this.jpaUserDetailsService = userDetailsService;
+    }
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
-                .cors(cors -> cors.configurationSource(corsConfiguration()))
-                .csrf(csfr -> csfr.disable())
+                .cors(withDefaults())
+                .csrf(csrf -> csrf.disable())
+                .formLogin(form -> form.disable())
+                .logout(out -> out
+                        .logoutUrl(endpoint + "/logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                        .requestMatchers(HttpMethod.GET, endpoint).permitAll()
-                        .requestMatchers(HttpMethod.POST, endpoint + "/auth/token").hasRole("USER")
-                        .requestMatchers(endpoint + "/private").access(hasScope("READ"))
-                        .anyRequest().access(hasScope("READ")))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.decoder(jwtDecoder())))
-                // .oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()))
-                .httpBasic(Customizer.withDefaults());
+                        .requestMatchers(endpoint).permitAll()
+                        .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
+                        .requestMatchers(endpoint + "/login").hasAnyRole("USER", "ADMIN") // principio de mínimos
+                        .requestMatchers(endpoint + "/public").permitAll()
+                        .requestMatchers(endpoint + "/private").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, endpoint + "/countries").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, endpoint + "/countries").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .userDetailsService(jpaUserDetailsService)
+                .httpBasic(withDefaults())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
 
         http.headers(header -> header.frameOptions(frame -> frame.sameOrigin()));
 
         return http.build();
+
     }
 
     @Bean
-    JwtEncoder jwtEncoder(){
-
-        return new NimbusJwtEncoder(new ImmutableSecret<>(key.getBytes()));
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        byte[] bytes = key.getBytes();
-        SecretKeySpec secretKey = new SecretKeySpec(bytes, 0, bytes.length, "RSA");
-        return NimbusJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS512).build();
-    }
-
-    //estas lineas sirven para enlazar el front
-    @Bean
-    CorsConfigurationSource corsConfiguration() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-
-
-    @Bean
-    UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User.withUsername("giaco")
-                        .password("{noop}password")
-                        .authorities("READ", "ROLE_USER")
-                        .build());
-    }
+    /*
+     * @Bean
+     * public InMemoryUserDetailsManager userDetailsManager() {
+     *
+     * UserDetails mickey = User.builder()
+     * .username("mickey")
+     * .password("{noop}mouse")
+     * .roles("ADMIN")
+     * .build();
+     *
+     * UserDetails minnie = User.builder()
+     * .username("minnie")
+     * .password("{noop}mouse")
+     * .roles("USER")
+     * .build();
+     *
+     * Collection<UserDetails> users = new ArrayList<>();
+     * users.add(mickey);
+     * users.add(minnie);
+     *
+     * return new InMemoryUserDetailsManager(users);
+     * }
+     */
 
 }
