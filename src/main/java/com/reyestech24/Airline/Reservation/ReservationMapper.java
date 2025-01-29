@@ -5,15 +5,7 @@ import com.reyestech24.Airline.Flight.Flight;
 import com.reyestech24.Airline.User.User;
 
 public class ReservationMapper {
-    public static ReservationDTO toDTO(Reservation reservation) {
-        return ReservationDTO.builder()
-                .id(reservation.getId())
-                .userId(reservation.getUser().getId())
-                .flightId(reservation.getFlight().getId())
-                .reservationDate(reservation.getReservationDate())
-                .seatsReserved(reservation.getSeatsReserved())
-                .build();
-    }
+
 
     public static Reservation toEntity(ReservationDTO reservationDTO, User user, Flight flight) {
         if (user == null) {

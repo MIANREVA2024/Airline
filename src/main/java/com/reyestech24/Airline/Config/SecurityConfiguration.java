@@ -62,7 +62,8 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    JwtEncoder jwtEncoder() {
+    JwtEncoder jwtEncoder(){
+
         return new NimbusJwtEncoder(new ImmutableSecret<>(key.getBytes()));
     }
 
@@ -73,6 +74,7 @@ public class SecurityConfiguration {
         return NimbusJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS512).build();
     }
 
+    //estas lineas sirven para enlazar el front
     @Bean
     CorsConfigurationSource corsConfiguration() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -85,6 +87,8 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 
     @Bean
     UserDetailsService userDetailsService() {

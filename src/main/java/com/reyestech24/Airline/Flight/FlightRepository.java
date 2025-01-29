@@ -6,5 +6,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
-    List<Flight> findByOriginAnDestinationandDateAvailableSeatsGreaterThan(String origin, String destination, LocalDate date, int seats);
+    List<Flight> findByOriginAndDestinationAndDateAndAvailableSeatsGreaterThan(String origin, String destination, LocalDate date, int seats);
 }

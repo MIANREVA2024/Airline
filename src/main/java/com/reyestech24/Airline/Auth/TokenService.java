@@ -22,7 +22,7 @@ public class TokenService {
     }
 
     public String generateToken(Authentication authentication) {
-
+        //esto nos va a ayudar a recuperar el instante
         Instant now = Instant.now();
 
         // recuperar scopes de usuario

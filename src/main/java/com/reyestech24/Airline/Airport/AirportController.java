@@ -9,10 +9,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/airports")
-@RequiredArgsConstructor
+
 public class AirportController {
 
     private final AirportService airportService;
+
+    public AirportController(AirportService airportService) {
+        this.airportService = airportService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Airport>> getAllAiports(){

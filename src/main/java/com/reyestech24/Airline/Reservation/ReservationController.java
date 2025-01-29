@@ -9,10 +9,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
-@RequiredArgsConstructor
+
 public class ReservationController {
 
     private final ReservationService reservationService;
+
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Reservation>> getAllReservations() {

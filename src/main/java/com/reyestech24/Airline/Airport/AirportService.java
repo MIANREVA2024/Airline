@@ -7,10 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+
 public class AirportService {
 
     private final AirportRepository airportRepository;
+
+    public AirportService(AirportRepository airportRepository) {
+        this.airportRepository = airportRepository;
+    }
 
     public List<Airport> getAllAirport() {
         return airportRepository.findAll();

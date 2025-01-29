@@ -17,4 +17,32 @@ public class ReservationDTO {
     private Long flightId;
     private LocalDateTime reservationDate;
     private int seatsReserved;
+
+    public ReservationDTO(Long id, Long userId, Long flightId, LocalDateTime reservationDate, int seatsReserved) {
+        this.id = id;
+        this.userId = userId;
+        this.flightId = flightId;
+        this.reservationDate = reservationDate;
+        this.seatsReserved = seatsReserved;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Long getFlightId() {
+        return flightId;
+    }
+
+    public LocalDateTime getReservationDate() {
+        return reservationDate;
+    }
+
+    public int getSeatsReserved() {
+        return seatsReserved;
+    }
 }

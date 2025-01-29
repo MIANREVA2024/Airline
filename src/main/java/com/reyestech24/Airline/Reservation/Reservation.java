@@ -28,4 +28,47 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)
     private Flight flight;
+
+    public Reservation() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(LocalDateTime reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public int getSeatsReserved() {
+        return seatsReserved;
+    }
+
+    public void setSeatsReserved(int seatsReserved) {
+        this.seatsReserved = seatsReserved;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 }
