@@ -58,6 +58,56 @@ The project will be implemented using Java 21, Maven and MySQL or PostgreSQL.
 2. Performance: Optimizations such as automatic flight status change and booking validation to maintain system efficiency.
 3. Availability: Test implementation to ensure system stability in production.
 
+## 🎯 EndPoints Overview:
+    ⚙️ Airports
+
+    1.POST /api/airports: Add a new airport.
+    2. GET /api/airports: Get all airports.
+    3. GET /api/airports/{id}: Get airport details by ID.
+    4. GET /api/airports/{name}: Get airport details by NAME.
+    5. PUT /api/airports/{id}: Update airport information.
+    6. DELETE /api/airports/{id}: Delete an airport.
+
+    ⚙️ Flights
+
+    1. POST /api/flights: Create a new flight.
+    2. GET /api/flights: Get all available flights.
+    3. GET /api/flights/{id}: Get flight details by ID.
+    4. PUT /api/flights/{id}: Update flight information.
+    5. DELETE /api/flights/{id}: Delete a flight.
+
+    ⚙️ Reservations
+
+    1. POST /api/reservations: Create a new reservation.
+    2. GET /api/reservations: Get all reservations.
+    3. GET /api/reservations/{id}: Get reservation details by ID.
+    4. PUT /api/reservations/{id}: Update a reservation.
+    5. DELETE /api/reservations/{id}: Delete a reservation.
+
+    ⚙️ Registers
+
+    POST /api/v1/register: Create a new register.
+
+    ⚙️ Users
+
+    POST /api/v1/users: Create a new user.
+    GET /api/v1/users/: Get all user details.
+    GET /api/v1/users/{id}: Get user details by ID.
+    PUT /api/v1/users/{id}: Update user details.
+    DELETE /api/v1/users/{id}: Delete a user.
+
+    ⚙️ Profiles
+
+    GET /api/v1/profiles: Get all profile details.
+    GET /api/v1/profiles/{id}: Get profile details by ID.
+    GET /api/v1/profiles/{email}: Get profile details[]() by email.
+    PUT /api/v1/profiles/{id}: Update profile details.
+
+## Diagrams
+    ![erDiagram.jpg](utils/erDiagram.jpg)
+    ![erDiagram.jpg](utils/UMLDiagram.jpg)
+    ![user.png](utils/user.png)
+
 ## Project Structure
 
 

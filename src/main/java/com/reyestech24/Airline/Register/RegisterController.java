@@ -1,29 +1,28 @@
 package com.reyestech24.Airline.Register;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.Map;
+import com.reyestech24.Airline.User.UserRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "${api-endpoint}/register")
 public class RegisterController {
+    private final RegisterService registerService;
 
-    private final RegisterService service;
-
-    public RegisterController(RegisterService service) {
-        this.service = service;
+    public RegisterController(RegisterService registerService) {
+        this.registerService = registerService;
     }
 
     @PostMapping("")
-    public ResponseEntity<Map<String,String>> register(@RequestBody UserDTO newUser) {
-
-        Map<String, String> response = service.save(newUser);
+    public ResponseEntity<Map<String, String>> register(@RequestBody UserRequest newUser){
+        Map<String, String> response = registerService.save(newUser);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
 }

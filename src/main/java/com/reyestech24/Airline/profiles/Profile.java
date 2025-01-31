@@ -1,45 +1,57 @@
 package com.reyestech24.Airline.profiles;
 import com.reyestech24.Airline.User.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "profiles")
 public class Profile {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_profile")
-    private Long id;
-
+    private Long profileId;
+    private String name;
+    private String phone;
     private String email;
-    private String address;
+    private String picture;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id_user")
+    @ManyToOne
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     private User user;
+
+    public Profile(String name, String phone, String email, String picture, User user) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.picture = picture;
+        this.user = user;
+    }
 
     public Profile() {
     }
 
-    public Profile(String email, String address, User user) {
-        this.email = email;
-        this.address = address;
-        this.user = user;
+    public Long getProfileId() {
+        return profileId;
     }
 
-    public Long getId() {
-        return id;
+    public void setProfileId(Long profileId) {
+        this.profileId = profileId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -50,11 +62,19 @@ public class Profile {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

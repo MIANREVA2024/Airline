@@ -1,10 +1,5 @@
 package com.reyestech24.Airline.Airport;
-
-import com.reyestech24.Airline.Flight.Flight;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "airports")

@@ -1,0 +1,51 @@
+
+erDiagram
+    AIRPORT {
+        Long id PK
+        String name
+        String code
+        String city
+        String country
+    }
+
+    FLIGHT {
+        Long flightId PK
+        String name
+        int availableSeats
+        LocalDateTime departureTime
+        LocalDateTime arrivalTime
+        boolean statusFlight
+        Date seatsBlockedUntil
+    }
+
+    PROFILE {
+        Long profileId PK
+        String name
+        String phone
+        String email
+        String picture
+    }
+
+    RESERVATION {
+        Long reservationId PK
+        Date reservationTime
+        int seats
+    }
+
+    ROLE {
+        Long id PK
+        String name
+    }
+
+    USER {
+        Long id PK
+        String username
+        String password
+    }
+
+    AIRPORT ||--o{ FLIGHT : "Origin"
+    AIRPORT ||--o{ FLIGHT : "Destination"
+    USER ||--|| PROFILE : "Has"
+    FLIGHT ||--o{ RESERVATION : "Has"
+    USER ||--o{ RESERVATION : "Makes"
+    USER }|--|{ ROLE : "Has"

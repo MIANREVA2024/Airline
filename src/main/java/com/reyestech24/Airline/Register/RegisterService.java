@@ -1,7 +1,11 @@
 package com.reyestech24.Airline.Register;
 
-
+import com.reyestech24.Airline.User.User;
 import com.reyestech24.Airline.User.UserRepository;
+import com.reyestech24.Airline.User.UserRequest;
+import com.reyestech24.Airline.exceptions.AirlineAlreadyExistsException;
+import com.reyestech24.Airline.profiles.Profile;
+import com.reyestech24.Airline.profiles.ProfileService;
 import com.reyestech24.Airline.roles.RoleService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,7 +46,7 @@ public class RegisterService {
         Profile profile = new Profile();
         profile.setUser(newUser);
 
-        String defaultPicture = "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_640.png";
+        String defaultPicture = "utils/erDiagram.jpg";
         profile.setPicture(defaultPicture);
 
         newUser.setProfile(profile);

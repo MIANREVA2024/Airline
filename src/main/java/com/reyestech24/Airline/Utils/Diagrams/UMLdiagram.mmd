@@ -1,0 +1,51 @@
+classDiagram
+class Airport {
++Long id
++String name
++String code
++String city
++String country
+}
+
+class Flight {
++Long flightId
++String name
++int availableSeats
++LocalDateTime departureTime
++LocalDateTime arrivalTime
++boolean statusFlight
++Date seatsBlockedUntil
++reserveSeats(int seats)
+}
+
+class Profile {
++Long profileId
++String name
++String phone
++String email
++String picture
+}
+
+class Reservation {
++Long reservationId
++Date reservationTime
++int seats
+}
+
+class Role {
++Long id
++String name
+}
+
+class User {
++Long id
++String username
++String password
+}
+
+Airport "1" <-- "0..*" Flight : origin
+Airport "1" <-- "0..*" Flight : destination
+User "1" <-- "1" Profile
+Flight "1" <-- "0..*" Reservation
+User "1" <-- "0..*" Reservation
+User "0..*" -- "0..*" Role

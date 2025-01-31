@@ -33,12 +33,8 @@ public class AirportController {
                         .orElse(ResponseEntity.notFound().build());
 
     }
-    /*
-    @PostMapping
-    public ResponseEntity<Airport> createAirport(@RequestBody Airport airport, @Valid AirportRequest airportRequest){
-        return ResponseEntity.ok(airportService.createAirport(airport));
-    }
-*/
+
+
     @PostMapping
     public ResponseEntity<AirportResponse> createAirport(@RequestBody @Valid AirportRequest airportRequest){
         AirportResponse airportResponse = airportService.createAirport(airportRequest);
