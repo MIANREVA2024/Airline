@@ -1,7 +1,9 @@
 package com.reyestech24.Airline.Airport;
 
+import jakarta.validation.Valid;
 import jdk.dynalink.linker.LinkerServices;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,21 +33,24 @@ public class AirportController {
                         .orElse(ResponseEntity.notFound().build());
 
     }
+    /*
     @PostMapping
-    public ResponseEntity<Airport> createAirport(@RequestBody Airport airport){
+    public ResponseEntity<Airport> createAirport(@RequestBody Airport airport, @Valid AirportRequest airportRequest){
         return ResponseEntity.ok(airportService.createAirport(airport));
     }
-
+*/
+    @PostMapping
+    public ResponseEntity<AirportResponse> createAirport(@RequestBody @Valid AirportRequest airportRequest){
+        AirportResponse airportResponse = airportService.createAirport(airportRequest);
+        return new ResponseEntity<>(airportResponse, HttpStatus.CREATED);
+    }
     @PutMapping("/{id}")
-    public ResponseEntity<Airport> updateAirport (@PathVariable Long id,@RequestBody Airport airportDetail){
-        try{
-            return ResponseEntity.ok(airportService.updateAirport(id,airportDetail));
-        }catch (RuntimeException e){
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<AirportResponse> updateAirport(@PathVariable Long id, @RequestBody @Valid AirportRequest airportRequest){
+        AirportResponse airportResponse = airportService.updateAirportById(id, airportRequest);
+        return new ResponseEntity<>(airportResponse, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAirport(@PathVariable Long id){
+    public ResponseEntity<Void> deleteAirport(@PathVariable Long id ){
         airportService.deleteAirport(id);
         return ResponseEntity.noContent().build();
     }

@@ -1,7 +1,6 @@
 package com.reyestech24.Airline.Flight;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDate;
 
@@ -15,6 +14,7 @@ public class Flight {
 
     private  String origin;
     private String destination;
+    @Column(name = "date")
     private LocalDate date;
     private int totalSeats;
     private int availableSeats;

@@ -1,7 +1,6 @@
 package com.reyestech24.Airline.Flight;
 
 import com.reyestech24.Airline.exceptions.ResourceNotFoundExceptions;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

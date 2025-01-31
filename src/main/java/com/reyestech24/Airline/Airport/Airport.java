@@ -17,8 +17,23 @@ public class Airport {
     private  String name;
     private  String code;
     private String city;
+    private String country;
 
 
+    public Airport(Long id, String name, String code, String city, String country) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.city = city;
+        this.country = country;
+    }
+
+    public Airport(String name, String code, String city, String country) {
+        this.name = name;
+        this.code = code;
+        this.city = city;
+        this.country = country;
+    }
 
     public Airport() {
     }
@@ -53,5 +68,13 @@ public class Airport {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
