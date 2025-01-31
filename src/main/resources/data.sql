@@ -15,7 +15,13 @@ INSERT INTO roles_users (role_id, user_id) VALUES (1, 1);
 INSERT INTO roles_users (role_id, user_id) VALUES (2, 2);
 
 /* Flights */
-/*INSERT INTO flights (origin, destination, date, totalSeats, availableSeats, available) VALUES ('Peru','madrid', '2025-01-30', 50, 2, true);*/
+
+INSERT INTO flights (name, available_seats, departure_time, arrival_time, id_origin, id_destination, status_flight) VALUES ('BCN456', 50, '2025-01-30T17:00:00', '2025-01-30T23:30:00', 1,  2, true);
+INSERT INTO flights (name, available_seats, departure_time, arrival_time, id_origin, id_destination, status_flight) VALUES ('BCN404', 50, '2025-01-30T12:00:00', '2025-01-30T19:30:00', 1,  2, true);
+INSERT INTO flights (name, available_seats, departure_time, arrival_time, id_origin, id_destination, status_flight) VALUES ('MAD380', 50, '2025-01-30T09:00:00', '2025-01-30T12:30:00', 2,  3, true);
+INSERT INTO flights (name, available_seats, departure_time, arrival_time, id_origin, id_destination, status_flight) VALUES ('BCN568', 50, '2025-01-30T12:00:00', '2025-01-30T19:30:00', 1,  2, true);
+INSERT INTO flights (name, available_seats, departure_time, arrival_time, id_origin, id_destination, status_flight) VALUES ('BCN125', 50, '2025-01-27T17:00:00', '2025-01-27T23:30:00', 3,  2, true);
+INSERT INTO flights (name, available_seats, departure_time, arrival_time, id_origin, id_destination, status_flight) VALUES ('VLC297', 50, '2025-01-26T12:00:00', '2025-01-26T19:30:00', 3,  1, true);
 
 
 
