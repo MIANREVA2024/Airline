@@ -3,11 +3,12 @@ package com.reyestech24.Airline.Reservation;
 import com.reyestech24.Airline.Flight.Flight;
 import com.reyestech24.Airline.User.User;
 import jakarta.persistence.*;
-import lombok.*;
+
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "reservations")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

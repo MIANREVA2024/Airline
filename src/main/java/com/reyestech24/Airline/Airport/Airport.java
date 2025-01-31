@@ -1,10 +1,13 @@
 package com.reyestech24.Airline.Airport;
 
+import com.reyestech24.Airline.Flight.Flight;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+import java.util.List;
 
+@Entity
+@Table(name = "airports")
 public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +17,8 @@ public class Airport {
     private  String name;
     private  String code;
     private String city;
+
+
 
     public Airport() {
     }
