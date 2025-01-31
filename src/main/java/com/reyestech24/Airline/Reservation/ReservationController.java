@@ -1,7 +1,7 @@
 package com.reyestech24.Airline.Reservation;
 
-import com.reyestech24.Airline.User.User;
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,45 +9,45 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
-
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final ReservationRepository reservationRepository;
 
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService,
+                                 ReservationRepository reservationRepository) {
         this.reservationService = reservationService;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Reservation>> getAllReservations() {
-        return ResponseEntity.ok(reservationService.getAllReservation());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
-        return reservationService.getReservationtById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        this.reservationRepository = reservationRepository;
     }
 
     @PostMapping
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-        return ResponseEntity.ok(reservationService.createReservation(reservation));
+    public ResponseEntity<ReservationResponse> createReservation(@RequestBody @Valid ReservationRequest reservationRequest){
+        ReservationResponse reservationResponse = reservationService.createReservation(reservationRequest);
+        return new ResponseEntity<>(reservationResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservationDetails) {
-        try {
-            return ResponseEntity.ok(reservationService.updateReservation(id, reservationDetails));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping
+    public ResponseEntity<List<ReservationResponse>> getAllReservations(){
+        List<ReservationResponse> reservationResponseList = reservationService.findAllReservations();
+        return new ResponseEntity<>(reservationResponseList, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
-        reservationService.deleteReservation(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/{id}")
+    public ResponseEntity<ReservationResponse> getReservationById(@PathVariable @Valid Long id){
+        ReservationResponse reservationResponse = reservationService.findReservationById(id);
+        return new ResponseEntity<>(reservationResponse, HttpStatus.OK);
     }
+
+    @PutMapping("/{reservationId}")
+    public ResponseEntity<ReservationResponse> updateReservation(@PathVariable Long reservationId, @RequestBody @Valid ReservationRequest reservationRequest){
+        ReservationResponse reservationResponse = reservationService.updateReservation(reservationId, reservationRequest);
+        return new ResponseEntity<>(reservationResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{reservationId}")
+    public ResponseEntity<String> deleteReservation(@PathVariable Long reservationId){
+        reservationService.deleteReservation(reservationId);
+        return new ResponseEntity<>("The reservation has been eliminated.", HttpStatus.OK);
+    }
+
 }
-

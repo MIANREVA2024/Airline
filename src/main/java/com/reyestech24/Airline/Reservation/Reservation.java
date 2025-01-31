@@ -1,55 +1,85 @@
 package com.reyestech24.Airline.Reservation;
-
 import com.reyestech24.Airline.Flight.Flight;
 import com.reyestech24.Airline.User.User;
 import jakarta.persistence.*;
 
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
+import static java.time.ZoneId.of;
 
 @Entity
 @Table(name = "reservations")
 public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Long id;
-    private LocalDateTime reservationDate;
-    private int seatsReserved;
+    @Column(name = "id_reservation", nullable = false)
+    private Long reservationId;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date reservationTime;
+
+    int seats;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "id_flight")
+    Flight flight;
 
     @ManyToOne
-    @JoinColumn(name = "flight_id", nullable = false)
-    private Flight flight;
+    @JoinColumn(name = "id_user")
+    User user;
+
+    public Reservation(Date reservationTime, int seats, Flight flight, User user) {
+        this.reservationTime = reservationTime;
+        this.seats = seats;
+        this.flight = flight;
+        this.user = user;
+    }
 
     public Reservation() {
     }
 
-    public Long getId() {
-        return id;
+    @PrePersist
+    public void onReservation(){
+        LocalDateTime now = LocalDateTime.now(of("Europe/Madrid"));
+        Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();
+        reservationTime = Date.from(instant);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getReservationId() {
+        return reservationId;
     }
 
-    public LocalDateTime getReservationDate() {
-        return reservationDate;
+    public void setReservationId(Long reservationId) {
+        this.reservationId = reservationId;
     }
 
-    public void setReservationDate(LocalDateTime reservationDate) {
-        this.reservationDate = reservationDate;
+    public Date getReservationTime() {
+        return reservationTime;
     }
 
-    public int getSeatsReserved() {
-        return seatsReserved;
+    public void setReservationTime(Date reservationTime) {
+        this.reservationTime = reservationTime;
     }
 
-    public void setSeatsReserved(int seatsReserved) {
-        this.seatsReserved = seatsReserved;
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     public User getUser() {
@@ -60,11 +90,4 @@ public class Reservation {
         this.user = user;
     }
 
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
 }

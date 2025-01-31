@@ -1,45 +1,57 @@
 package com.reyestech24.Airline.Register;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import com.reyestech24.Airline.User.User;
-import com.reyestech24.Airline.User.UserDTO;
 import com.reyestech24.Airline.User.UserRepository;
-import com.reyestech24.Airline.facade.encryptions.IEncryptFacade;
 import com.reyestech24.Airline.roles.RoleService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.Base64.Decoder;
 
 @Service
 public class RegisterService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
-    private final IEncryptFacade encryptFacade;
+    private final ProfileService profileService;
 
-    public RegisterService(UserRepository userRepository, RoleService roleService, IEncryptFacade encryptFacade) {
+    public RegisterService(UserRepository userRepository, RoleService roleService, ProfileService profileService) {
         this.userRepository = userRepository;
         this.roleService = roleService;
-        this.encryptFacade = encryptFacade;
+        this.profileService = profileService;
     }
 
-    public Map<String, String> save(UserDTO userData) {
+    public Map<String, String> save(UserRequest userRequest){
 
-        String passwordDecoded = encryptFacade.decode("base64",userData.password());
+        Optional<User> existingUser = userRepository.findByUsername(userRequest.username());
+        if (existingUser.isPresent()){
+            throw new AirlineAlreadyExistsException("The user already exist.");
+        }
 
-        System.out.println("<------------ " + passwordDecoded);
+        Decoder decoder = Base64.getDecoder();
+        byte[] decodedBytes = decoder.decode(userRequest.password());
+        String passwordDecoded = new String(decodedBytes);
 
-        String passwordEncoded = encryptFacade.encode("bcrypt", passwordDecoded);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String passwordEncoded = encoder.encode(passwordDecoded);
 
-        User newUser = new User(userData.username(), passwordEncoded);
-        newUser.setRoles(roleService.assignDefaultRole());
+        User newUser = new User(userRequest.username(), passwordEncoded);
+        newUser.setRoles(roleService.assignDefaultRole(newUser.getId()));
+
+        Profile profile = new Profile();
+        profile.setUser(newUser);
+
+        String defaultPicture = "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_640.png";
+        profile.setPicture(defaultPicture);
+
+        newUser.setProfile(profile);
 
         userRepository.save(newUser);
 
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Success");
+        Map<String, String> userResponse = new HashMap<>();
+        userResponse.put("message", "Success");
 
-        return response;
+        return userResponse;
     }
-
 }
