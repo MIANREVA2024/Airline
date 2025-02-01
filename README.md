@@ -104,15 +104,15 @@ The project will be implemented using Java 21, Maven and MySQL or PostgreSQL.
     PUT /api/v1/profiles/{id}: Update profile details.
 
 ## Diagrams
-![erDiagram.png](utils/erDiagram.png)
-![UMLDiagram.png](utils/UMLDiagram.png)
-![user.png](utils/user.png)
-![user.png](utils/user.png)
+![erDiagram.png](Utils/erDiagram.png)
+![UMLDiagram.png](Utils/UMLDiagram.png)
+![user.png](Utils/user.png)
+![erDiagram.png](Utils/erDiagram.mmd)
 
 ## Project Structure
 
-![estructura_proyecto.txt](utils/estructura_proyecto.txt)
-![estructura_proyecto.txt](utils/estructura_proyecto.txt)
+![estructura_proyecto.txt](Utils/estructura_proyecto.txt)
+
 
 
 ## 💻 Technology Stack:
