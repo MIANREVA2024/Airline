@@ -106,11 +106,15 @@ The project will be implemented using Java 21, Maven and MySQL or PostgreSQL.
 ## Diagrams
 
 ![erDiagram.png](utils/erDiagram.png)
+
 ![UMLDiagram.png](utils/UMLDiagram.png)
+
 ![user.png](utils/user.png)
 
 
 ## Project Structure
+
+.
 ├── estructura_proyecto.txt
 ├── HELP.md
 ├── mvnw
@@ -194,23 +198,14 @@ The project will be implemented using Java 21, Maven and MySQL or PostgreSQL.
 │   │   │               ├── security
 │   │   │               │   ├── JpaUserDetailsService.java
 │   │   │               │   └── SecurityUser.java
-│   │   │               ├── User
-│   │   │               │   ├── UserController.java
-│   │   │               │   ├── User.java
-│   │   │               │   ├── UserMapper.java
-│   │   │               │   ├── UserRepository.java
-│   │   │               │   ├── UserRequest.java
-│   │   │               │   ├── UserResponse.java
-│   │   │               │   └── UserService.java
-│   │   │               └── Utils
-│   │   │                   ├── ApiRest
-│   │   │                   │   └── Airline.postman_collection.json
-│   │   │                   ├── Diagrams
-│   │   │                   │   ├── erDiagram.mmd
-│   │   │                   │   └── UMLdiagram.mmd
-│   │   │                   ├── erDiagram.png
-│   │   │                   ├── UMLdiagram.png
-│   │   │                   └── user.png
+│   │   │               └── User
+│   │   │                   ├── UserController.java
+│   │   │                   ├── User.java
+│   │   │                   ├── UserMapper.java
+│   │   │                   ├── UserRepository.java
+│   │   │                   ├── UserRequest.java
+│   │   │                   ├── UserResponse.java
+│   │   │                   └── UserService.java
 │   │   └── resources
 │   │       ├── application-h2.properties
 │   │       ├── application-mysql.properties
@@ -228,101 +223,14 @@ The project will be implemented using Java 21, Maven and MySQL or PostgreSQL.
 │                   └── Airline
 │                       ├── AirlineApplicationTests.java
 │                       └── Airport
-└── target
-├── classes
-│   ├── application-h2.properties
-│   ├── application-mysql.properties
-│   ├── application-postgres.properties
-│   ├── application.properties
-│   ├── com
-│   │   └── reyestech24
-│   │       └── Airline
-│   │           ├── AirlineApplication.class
-│   │           ├── Airport
-│   │           │   ├── Airport.class
-│   │           │   ├── AirportController.class
-│   │           │   ├── AirportMapper.class
-│   │           │   ├── AirportRepository.class
-│   │           │   ├── AirportRequest.class
-│   │           │   ├── AirportResponse.class
-│   │           │   ├── AirportService.class
-│   │           │   └── AirportValidationException.class
-│   │           ├── Auth
-│   │           │   └── AuthController.class
-│   │           ├── Config
-│   │           │   ├── BeansConfiguration.class
-│   │           │   └── SecurityConfiguration.class
-│   │           ├── exceptions
-│   │           │   ├── AirlineAlreadyExistsException.class
-│   │           │   ├── AirlineNotFoundException.class
-│   │           │   ├── BadRequestException.class
-│   │           │   ├── GlobalExceptionHandler.class
-│   │           │   ├── ResourceNotFoundExceptions.class
-│   │           │   └── UnauthorizedException.class
-│   │           ├── facade
-│   │           │   └── encryptions
-│   │           │       ├── Base64System.class
-│   │           │       ├── BcryptSystem.class
-│   │           │       ├── EncryptionFacade.class
-│   │           │       ├── IEncoder.class
-│   │           │       └── IEncryptFacade.class
-│   │           ├── Flight
-│   │           │   ├── Flight.class
-│   │           │   ├── FlightController.class
-│   │           │   ├── FlightMapper.class
-│   │           │   ├── FlightRepository.class
-│   │           │   ├── FlightRequest.class
-│   │           │   ├── FlightResponse.class
-│   │           │   ├── FlightService.class
-│   │           │   └── FlightValidationException.class
-│   │           ├── home
-│   │           │   └── HomeController.class
-│   │           ├── profiles
-│   │           │   ├── Profile.class
-│   │           │   ├── ProfileController.class
-│   │           │   ├── ProfileMapper.class
-│   │           │   ├── ProfileRepository.class
-│   │           │   ├── ProfileRequest.class
-│   │           │   ├── ProfileResponse.class
-│   │           │   ├── ProfileService.class
-│   │           │   └── ProfileValidationExcepcion.class
-│   │           ├── Register
-│   │           │   ├── RegisterController.class
-│   │           │   └── RegisterService.class
-│   │           ├── Reservation
-│   │           │   ├── Reservation.class
-│   │           │   ├── ReservationController.class
-│   │           │   ├── ReservationMapper.class
-│   │           │   ├── ReservationRepository.class
-│   │           │   ├── ReservationRequest.class
-│   │           │   ├── ReservationResponse.class
-│   │           │   ├── ReservationService.class
-│   │           │   └── ReservationValidationException.class
-│   │           ├── roles
-│   │           │   ├── exceptions
-│   │           │   │   ├── RoleException.class
-│   │           │   │   └── RoleNotFoundException.class
-│   │           │   ├── Role.class
-│   │           │   ├── RoleRepository.class
-│   │           │   └── RoleService.class
-│   │           ├── security
-│   │           │   ├── JpaUserDetailsService.class
-│   │           │   └── SecurityUser.class
-│   │           └── User
-│   │               ├── User.class
-│   │               ├── UserController.class
-│   │               ├── UserMapper.class
-│   │               ├── UserRepository.class
-│   │               ├── UserRequest.class
-│   │               ├── UserResponse.class
-│   │               └── UserService.class
-│   ├── data.sql
-│   └── META-INF
-│       └── additional-spring-configuration-metadata.json
-└── generated-sources
-└── annotations
-
-    
+└── utils
+├── ApiRest
+│   └── Airline.postman_collection.json
+├── erDiagram.mmd
+├── erDiagram.png
+├── UMLdiagram.mmd
+├── UMLdiagram.png
+└── user.png
 
 
 
