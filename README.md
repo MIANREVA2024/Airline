@@ -107,9 +107,11 @@ The project will be implemented using Java 21, Maven and MySQL or PostgreSQL.
 ![erDiagram.png](utils/erDiagram.png)
 ![UMLDiagram.png](utils/UMLDiagram.png)
 ![user.png](utils/user.png)
+![user.png](utils/user.png)
 
 ## Project Structure
 
+![estructura_proyecto.txt](utils/estructura_proyecto.txt)
 ![estructura_proyecto.txt](utils/estructura_proyecto.txt)
 
 
