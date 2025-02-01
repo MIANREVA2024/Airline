@@ -1,0 +1,212 @@
+.
+├── estructura_proyecto.txt
+├── HELP.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── README.md
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── reyestech24
+│   │   │           └── Airline
+│   │   │               ├── AirlineApplication.java
+│   │   │               ├── Airport
+│   │   │               │   ├── AirportController.java
+│   │   │               │   ├── Airport.java
+│   │   │               │   ├── AirportMapper.java
+│   │   │               │   ├── AirportRepository.java
+│   │   │               │   ├── AirportRequest.java
+│   │   │               │   ├── AirportResponse.java
+│   │   │               │   ├── AirportService.java
+│   │   │               │   └── AirportValidationException.java
+│   │   │               ├── Auth
+│   │   │               │   └── AuthController.java
+│   │   │               ├── Config
+│   │   │               │   ├── BeansConfiguration.java
+│   │   │               │   └── SecurityConfiguration.java
+│   │   │               ├── exceptions
+│   │   │               │   ├── AirlineAlreadyExistsException.java
+│   │   │               │   ├── AirlineNotFoundException.java
+│   │   │               │   ├── BadRequestException.java
+│   │   │               │   ├── GlobalExceptionHandler.java
+│   │   │               │   ├── ResourceNotFoundExceptions.java
+│   │   │               │   └── UnauthorizedException.java
+│   │   │               ├── facade
+│   │   │               │   └── encryptions
+│   │   │               │       ├── Base64System.java
+│   │   │               │       ├── BcryptSystem.java
+│   │   │               │       ├── EncryptionFacade.java
+│   │   │               │       ├── IEncoder.java
+│   │   │               │       └── IEncryptFacade.java
+│   │   │               ├── Flight
+│   │   │               │   ├── FlightController.java
+│   │   │               │   ├── Flight.java
+│   │   │               │   ├── FlightMapper.java
+│   │   │               │   ├── FlightRepository.java
+│   │   │               │   ├── FlightRequest.java
+│   │   │               │   ├── FlightResponse.java
+│   │   │               │   ├── FlightService.java
+│   │   │               │   └── FlightValidationException.java
+│   │   │               ├── home
+│   │   │               │   └── HomeController.java
+│   │   │               ├── profiles
+│   │   │               │   ├── ProfileController.java
+│   │   │               │   ├── Profile.java
+│   │   │               │   ├── ProfileMapper.java
+│   │   │               │   ├── ProfileRepository.java
+│   │   │               │   ├── ProfileRequest.java
+│   │   │               │   ├── ProfileResponse.java
+│   │   │               │   ├── ProfileService.java
+│   │   │               │   └── ProfileValidationExcepcion.java
+│   │   │               ├── Register
+│   │   │               │   ├── RegisterController.java
+│   │   │               │   └── RegisterService.java
+│   │   │               ├── Reservation
+│   │   │               │   ├── ReservationController.java
+│   │   │               │   ├── Reservation.java
+│   │   │               │   ├── ReservationMapper.java
+│   │   │               │   ├── ReservationRepository.java
+│   │   │               │   ├── ReservationRequest.java
+│   │   │               │   ├── ReservationResponse.java
+│   │   │               │   ├── ReservationService.java
+│   │   │               │   └── ReservationValidationException.java
+│   │   │               ├── roles
+│   │   │               │   ├── exceptions
+│   │   │               │   │   ├── RoleException.java
+│   │   │               │   │   └── RoleNotFoundException.java
+│   │   │               │   ├── Role.java
+│   │   │               │   ├── RoleRepository.java
+│   │   │               │   └── RoleService.java
+│   │   │               ├── security
+│   │   │               │   ├── JpaUserDetailsService.java
+│   │   │               │   └── SecurityUser.java
+│   │   │               └── User
+│   │   │                   ├── UserController.java
+│   │   │                   ├── User.java
+│   │   │                   ├── UserMapper.java
+│   │   │                   ├── UserRepository.java
+│   │   │                   ├── UserRequest.java
+│   │   │                   ├── UserResponse.java
+│   │   │                   └── UserService.java
+│   │   └── resources
+│   │       ├── application-h2.properties
+│   │       ├── application-mysql.properties
+│   │       ├── application-postgres.properties
+│   │       ├── application.properties
+│   │       ├── data.sql
+│   │       ├── META-INF
+│   │       │   └── additional-spring-configuration-metadata.json
+│   │       ├── static
+│   │       └── templates
+│   └── test
+│       └── java
+│           └── com
+│               └── reyestech24
+│                   └── Airline
+│                       ├── AirlineApplicationTests.java
+│                       └── Airport
+├── target
+│   ├── classes
+│   │   ├── application-h2.properties
+│   │   ├── application-mysql.properties
+│   │   ├── application-postgres.properties
+│   │   ├── application.properties
+│   │   ├── com
+│   │   │   └── reyestech24
+│   │   │       └── Airline
+│   │   │           ├── AirlineApplication.class
+│   │   │           ├── Airport
+│   │   │           │   ├── Airport.class
+│   │   │           │   ├── AirportController.class
+│   │   │           │   ├── AirportMapper.class
+│   │   │           │   ├── AirportRepository.class
+│   │   │           │   ├── AirportRequest.class
+│   │   │           │   ├── AirportResponse.class
+│   │   │           │   ├── AirportService.class
+│   │   │           │   └── AirportValidationException.class
+│   │   │           ├── Auth
+│   │   │           │   └── AuthController.class
+│   │   │           ├── Config
+│   │   │           │   ├── BeansConfiguration.class
+│   │   │           │   └── SecurityConfiguration.class
+│   │   │           ├── exceptions
+│   │   │           │   ├── AirlineAlreadyExistsException.class
+│   │   │           │   ├── AirlineNotFoundException.class
+│   │   │           │   ├── BadRequestException.class
+│   │   │           │   ├── GlobalExceptionHandler.class
+│   │   │           │   ├── ResourceNotFoundExceptions.class
+│   │   │           │   └── UnauthorizedException.class
+│   │   │           ├── facade
+│   │   │           │   └── encryptions
+│   │   │           │       ├── Base64System.class
+│   │   │           │       ├── BcryptSystem.class
+│   │   │           │       ├── EncryptionFacade.class
+│   │   │           │       ├── IEncoder.class
+│   │   │           │       └── IEncryptFacade.class
+│   │   │           ├── Flight
+│   │   │           │   ├── Flight.class
+│   │   │           │   ├── FlightController.class
+│   │   │           │   ├── FlightMapper.class
+│   │   │           │   ├── FlightRepository.class
+│   │   │           │   ├── FlightRequest.class
+│   │   │           │   ├── FlightResponse.class
+│   │   │           │   ├── FlightService.class
+│   │   │           │   └── FlightValidationException.class
+│   │   │           ├── home
+│   │   │           │   └── HomeController.class
+│   │   │           ├── profiles
+│   │   │           │   ├── Profile.class
+│   │   │           │   ├── ProfileController.class
+│   │   │           │   ├── ProfileMapper.class
+│   │   │           │   ├── ProfileRepository.class
+│   │   │           │   ├── ProfileRequest.class
+│   │   │           │   ├── ProfileResponse.class
+│   │   │           │   ├── ProfileService.class
+│   │   │           │   └── ProfileValidationExcepcion.class
+│   │   │           ├── Register
+│   │   │           │   ├── RegisterController.class
+│   │   │           │   └── RegisterService.class
+│   │   │           ├── Reservation
+│   │   │           │   ├── Reservation.class
+│   │   │           │   ├── ReservationController.class
+│   │   │           │   ├── ReservationMapper.class
+│   │   │           │   ├── ReservationRepository.class
+│   │   │           │   ├── ReservationRequest.class
+│   │   │           │   ├── ReservationResponse.class
+│   │   │           │   ├── ReservationService.class
+│   │   │           │   └── ReservationValidationException.class
+│   │   │           ├── roles
+│   │   │           │   ├── exceptions
+│   │   │           │   │   ├── RoleException.class
+│   │   │           │   │   └── RoleNotFoundException.class
+│   │   │           │   ├── Role.class
+│   │   │           │   ├── RoleRepository.class
+│   │   │           │   └── RoleService.class
+│   │   │           ├── security
+│   │   │           │   ├── JpaUserDetailsService.class
+│   │   │           │   └── SecurityUser.class
+│   │   │           └── User
+│   │   │               ├── User.class
+│   │   │               ├── UserController.class
+│   │   │               ├── UserMapper.class
+│   │   │               ├── UserRepository.class
+│   │   │               ├── UserRequest.class
+│   │   │               ├── UserResponse.class
+│   │   │               └── UserService.class
+│   │   ├── data.sql
+│   │   └── META-INF
+│   │       └── additional-spring-configuration-metadata.json
+│   └── generated-sources
+│       └── annotations
+└── utils
+    ├── ApiRest
+    │   └── Airline.postman_collection.json
+    ├── erDiagram.mmd
+    ├── erDiagram.png
+    ├── UMLdiagram.mmd
+    ├── UMLdiagram.png
+    └── user.png
+
+57 directories, 153 files
